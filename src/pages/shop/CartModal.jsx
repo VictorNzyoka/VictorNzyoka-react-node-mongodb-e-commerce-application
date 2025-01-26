@@ -2,7 +2,7 @@ import React from "react"
 import { X } from "lucide-react"
 import OrderSummary from "./OrderSummary"
 import { useDispatch } from "react-redux"
-import { updateQuantity } from "../../redux/features/cart/cartSlice"
+import { removeFromCart, updateQuantity } from "../../redux/features/cart/cartSlice"
 
 const CartModal = ({ products, isOpen, onClose }) => {
   const dispatch = useDispatch();
@@ -11,6 +11,13 @@ const CartModal = ({ products, isOpen, onClose }) => {
     const payload = {type,id}
     dispatch(updateQuantity(payload))
   }
+
+  const handleRemove = (e,id) => {
+    e.preventDefault()
+    dispatch(removeFromCart({id}))
+
+  }
+  
   return (
     <div
       className={`fixed z-[1000] inset-0 bg-black bg-opacity-50 transition-opacity ${
@@ -56,7 +63,7 @@ const CartModal = ({ products, isOpen, onClose }) => {
                   <div className="flex flex-col md:flex-row md:items-center mt-2 md:mt-0">
                     <div className="flex items-center">
                       <button
-                      onClick={() => handleQuantity('decrement',item.id)}
+                      onClick={() => handleQuantity('decrement',item._id)}
                         className="size-6 flex items-center justify-center px-1.5 rounded-full
                         bg-gray-200 text-gray-700 hover:bg-primary hover:text-white"
                       >
@@ -64,7 +71,7 @@ const CartModal = ({ products, isOpen, onClose }) => {
                       </button>
                       <span className="px-2 item-center mx-1">{item.quantity}</span>
                       <button
-                       onClick={() => handleQuantity('increment',item.id)}
+                       onClick={() => handleQuantity('increment',item._id)}
                         className="size-6 flex items-center justify-center px-1.5 rounded-full
                         bg-gray-200 text-gray-700 hover:bg-primary hover:text-white"
                       >
@@ -72,7 +79,9 @@ const CartModal = ({ products, isOpen, onClose }) => {
                       </button>
                     </div>
                     <div className="ml-5 mt-2 md:mt-0">
-                      <button className="text-red-500 hover:text-red-800">Remove</button>
+                      <button 
+                      onClick={(e) => handleRemove(e,item.id)}
+                      className="text-red-500 hover:text-red-800">Remove</button>
                     </div>
                   </div>
                 </div>
