@@ -38,7 +38,7 @@ const Navbar= () => {
                     </span>
                     <span>
                         <Link to="/login">
-                        <i className ="ri-login-box-line"></i>
+                        <i className="ri-user-line"></i>
                         </Link>
                     </span>
                 </div>
