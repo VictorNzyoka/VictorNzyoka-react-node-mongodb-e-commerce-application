@@ -44,7 +44,7 @@ const Login = () => {
                 placeholder='Email Adress' required className='
                 w-full bg-gray-100 focus:outline-none px-5 py-3'/>
 
-                <input type="text"  name='password' id='password'
+                <input type="password"  name='password' id='password'
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder='Password' required className='
                 w-full bg-gray-100 focus:outline-none px-5 py-3'/>

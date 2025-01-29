@@ -7,6 +7,7 @@ import { getBaseUrl } from "../../../utils/baseUrl";
         baseUrl: `${getBaseUrl()}/api/auth`,
         credentials: 'include',
     }),
+    tagTypes: ["User"],
     endpoints: (builder) => ({
         registerUser: builder.mutation({
             query: (newUser) => ({
@@ -34,14 +35,14 @@ import { getBaseUrl } from "../../../utils/baseUrl";
                 method: "GET",
             }),
             refetchOnMount:true,
-            invalidatesTags: ["Users"],
+            invalidatesTags: ["User"],
         }),
         deleteUser: builder.mutation({
             query: (userId) => ({
                 url: `/users/${userId}`,
                 method: "DELETE",
             }),
-            invalidatesTags: ["Users"],
+            invalidatesTags: ["User"],
         }),
         updateUser: builder.mutation({
             query: ({userId,role}) => ({
@@ -49,7 +50,7 @@ import { getBaseUrl } from "../../../utils/baseUrl";
                 method: "PUT",
                 body: {role}
             }),
-            invalidatesTags: ["Users"],
+            invalidatesTags: ["User"],
         }),
         editRole: builder.mutation({
             query: ({userData}) => ({
