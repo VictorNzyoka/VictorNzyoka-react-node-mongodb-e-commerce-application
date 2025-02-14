@@ -22,7 +22,7 @@ import { getBaseUrl } from "../../../utils/baseUrl";
                 url: "/total-reviews"
             })
         }),
-        getReviewByUserId: builder.query({
+        getReviewsByUserId: builder.query({
             query: (userId) => ({
                 url: `/${userId}`
             }),

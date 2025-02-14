@@ -12,12 +12,14 @@ const Login = () => {
     const dispatch = useDispatch();
     const [loginUser,{isloading:LoginLoading}] = useLoginUserMutation();
     const navigate = useNavigate();
+    const user_type = "admin";
 
     const handleLogin = async (e) => {
         e.preventDefault();
         const data = {
             email,
-            password
+            password,
+            user_type
         }
         // console.log(data)
         try {

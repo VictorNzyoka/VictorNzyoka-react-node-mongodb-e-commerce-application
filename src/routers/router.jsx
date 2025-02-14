@@ -8,6 +8,18 @@ import SingleProduct from '../pages/shop/ProductDetails/SingleProduct';
 import { LogIn } from 'lucide-react';
 import Login from '../components/Login';
 import Register from '../components/Register';
+import DashboardLayout from '../pages/dashboard/DashboardLayout';
+import PrivateRoute from './PrivateRoute';
+import UserMain from '../pages/dashboard/user/dashboard/UserMain';
+import UserOrders from '../pages/dashboard/user/UserOrders';
+import PaymentSuccess from '../components/PaymentSuccess';
+import OrderDetails from '../pages/dashboard/user/OrderDetails';
+import UserPayment from '../pages/dashboard/user/UserPayment';
+import UserReviews from '../pages/dashboard/user/UserReviews';
+import UserProfile from '../pages/dashboard/user/UserProfile';
+import AdminMain from '../pages/dashboard/admin/dashboard/AdminMain';
+import AddProduct from '../pages/dashboard/admin/addProduct/AddProduct';
+
 
 const router = createBrowserRouter([
   {
@@ -18,7 +30,15 @@ const router = createBrowserRouter([
       {path: "/categories/:categoryName",element: <CategoryPage/>  ,},
       {path: "/search",element: <Search/> },
       {path: "/shop",element: <ShopPage/>  },
-      {path: "/shop/:id", element:<SingleProduct/>}
+      {path: "/shop/:id", element:<SingleProduct/>},
+      {
+        path: "/success",
+        element: <PaymentSuccess/>
+      },
+      {
+        path: "/orders/:orderId",
+        element: <OrderDetails/>
+      }
     ]
   },
   {
@@ -29,6 +49,44 @@ const router = createBrowserRouter([
   path: "/register",
   element: <Register/>
   },
+  {
+    path: "/dashboard",
+    element: <PrivateRoute><DashboardLayout/></PrivateRoute>,
+    children: [
+      //user routes
+      {path:'',element: <UserMain/>},
+      {path:'orders',element: <UserOrders/>},
+      {path:'payments',element: <UserPayment/>},
+      {path:'profile',element: <UserProfile/>},
+      {path:'reviews',element: <UserReviews/>},
+
+
+      //admin routes
+      {
+        path: "admin" , 
+        element: <PrivateRoute role="admin"><AdminMain/></PrivateRoute>
+      },
+      {
+        path: "add-new-product" , 
+        element: <PrivateRoute role="admin"><AddProduct/></PrivateRoute>},
+      {
+        path: "manage-products" , 
+        element: <PrivateRoute role="admin"><div>manage post</div></PrivateRoute>
+      },
+      {
+        path: "update-product/:id" , 
+        element: <PrivateRoute role="admin"> <div>update post</div></PrivateRoute>
+      },
+      {
+        path: "users" , 
+        element: <PrivateRoute role="admin"><div>user</div></PrivateRoute>
+      },
+      {
+        path: "manage-orders" , 
+        element: <PrivateRoute role="admin"><div>manage orders</div></PrivateRoute>
+      },
+    ]
+  }
 ]);
 
 export default router;

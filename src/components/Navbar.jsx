@@ -33,7 +33,7 @@ const Navbar= () => {
         {label: "Dashboard", path: "/dashboard/admin"},
         {label: "Manage Products", path: "/dashboard/manage-products"},
         {label: "All Orders", path: "/dashboard/all-orders"},
-        {label: "Add New Product", path: "/dashboard/add-new-post"},
+        {label: "Add New Product", path: "/dashboard/add-new-product"},
     ]
 
     const userDropDownMenus =  [

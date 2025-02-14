@@ -53,10 +53,10 @@ import { getBaseUrl } from "../../../utils/baseUrl";
             invalidatesTags: ["User"],
         }),
         editRole: builder.mutation({
-            query: ({userData}) => ({
+            query: (userData) => ({
                 url: `/edit-profile`,
                 method: "PATCH",
-                body: {userData}
+                body: userData
             })
         }),
     })
