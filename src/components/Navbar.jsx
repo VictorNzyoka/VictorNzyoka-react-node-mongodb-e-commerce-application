@@ -62,8 +62,8 @@ const Navbar= () => {
                 <ul className="nav__links">
                     <li className="link"><Link to="/">Home</Link></li>
                     <li className="link"><Link to="/shop">Shop</Link></li>
-                    <li className="link"><Link to="/pages">Pages</Link></li>
-                    <li className="link"><Link to="/contacts">Contacts</Link></li>
+                    <li className="link"><Link to="/about-us">About Us</Link></li>
+                    <li className="link"><Link to="/contacts">Contacts Us</Link></li>
                 </ul>
                 <div className="nav__logo">
                     <Link to="/">Shopless<span>.</span></Link>

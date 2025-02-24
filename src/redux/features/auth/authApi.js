@@ -29,7 +29,7 @@ import { getBaseUrl } from "../../../utils/baseUrl";
                 method: "POST",
             })
         }),
-        getUser: builder.mutation({
+        getUser: builder.query({
             query: () => ({
                 url: "/users",
                 method: "GET",
@@ -39,7 +39,7 @@ import { getBaseUrl } from "../../../utils/baseUrl";
         }),
         deleteUser: builder.mutation({
             query: (userId) => ({
-                url: `/users/${userId}`,
+                url: `/user/${userId}`,
                 method: "DELETE",
             }),
             invalidatesTags: ["User"],
@@ -63,7 +63,7 @@ import { getBaseUrl } from "../../../utils/baseUrl";
  })
 
 
- export const {useRegisterUserMutation,useLoginUserMutation,useLogoutUserMutation,useGetUserMutation,useDeleteUserMutation,
+ export const {useRegisterUserMutation,useLoginUserMutation,useLogoutUserMutation,useGetUserQuery,useDeleteUserMutation,
     useEditRoleMutation,useUpdateUserMutation
  } = authApi;
  export default authApi;
