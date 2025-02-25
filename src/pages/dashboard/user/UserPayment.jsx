@@ -5,14 +5,14 @@ import { useGetOrdersByEmailQuery } from '../../../redux/features/orders/orderAp
 const UserPayment = () => {
     const { user } = useSelector((state) => state.auth);
     const { data: ordersData, error, isLoading } = useGetOrdersByEmailQuery(user?.email);
-    // console.log(ordersData)
+    console.log(ordersData)
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>No orders found</div>;
 
     const orders = ordersData || [];
     console.log(orders)
-    const totalPayment = orders.reduce((acc, order) => acc + order.totalAmount, 0);
+    const totalPayment = orders.reduce((acc, order) => acc + order.amount, 0);
 
     return (
         <div className="py-6 px-4">
@@ -24,7 +24,7 @@ const UserPayment = () => {
                         <li key={index} className="mb-4">
                             <h5 className="font-medium text-gray-800 mb-2">Order #{index + 1}</h5>
                             <div>
-                                <span className="text-gray-600">Amount: Ksh {item.totalAmount.toFixed(2)}</span>
+                                <span className="text-gray-600">Amount: Ksh {item.amount.toFixed(2)}</span>
                             </div>
                             <div className="flex md:flex-row items-center space-x-2">
                                 <span className="text-gray-600">

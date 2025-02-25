@@ -11,9 +11,8 @@ const orderApi = createApi({
     endpoints: (builder) => ({
         getOrdersByEmail: builder.query({
             query: (email) => ({
-                url: '/', 
+                url: `/${email}`, 
                 method: 'GET',
-                params: { email } 
             })
         }),
         getOrderById: builder.query({
@@ -24,24 +23,30 @@ const orderApi = createApi({
             providesTags: ['Order']
         }),
         getAllOrders: builder.query({
-            query: () => (
-                {
-                url: '/orders',
-                method: 'GET',
-            }
-        ),
-        providesTags: ['Order']
-        }),
-        updateOrderStatus: builder.mutation({
-            query: ({id,status}) => ({
-                url: `/update-order-status/${id}`,
-                method: 'PATCH',
-                body: {status},
+            query: ({ page = 1, limit = 10, sort = "-createdAt" }) => {
+              const params = new URLSearchParams({
+                page:page.toString(),
+                limit:limit.toString(),
+                sort,
+
+              });          
+              return {
+                url: `/?${params.toString()}`,
+                method: "GET",
+              };
+            },
+            providesTags: ['Orders']
+          }),
+          updateOrderStatus: builder.mutation({
+            query: ({ id, status }) => ({
+              url: `/update-order-status/${id}`,
+              method: 'PATCH',
+              body: { status }, 
             }),
-            invalidatesTags: ['Orders']
-        }),
+            invalidatesTags: ['Orders'],
+          }),
         deleteOrder: builder.mutation({
-            query: ({id}) => ({
+            query: (id) => ({
                 url: `/delete-order/${id}`,
                 method: 'DELETE'
             }),
@@ -49,9 +54,10 @@ const orderApi = createApi({
         }),
         checkoutOrder: builder.mutation({
 
-        query: () => ({
+        query: (orderData) => ({
             url: '/checkout',
-            method: 'POST'
+            method: 'POST',
+            body: orderData,
         })
         })
     })

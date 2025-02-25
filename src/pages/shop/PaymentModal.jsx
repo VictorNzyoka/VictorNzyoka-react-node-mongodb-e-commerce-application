@@ -15,8 +15,9 @@ const PaymentModal = ({ user, amount, products, onClose }) => {
     setPhoneNumber(value)
     setError("")
   }
-  const userId = user?._id;
-  console.log(userId)
+
+  const userId = user?._id
+  const email = user?.email
 
   const handleSubmit = async () => {
     if (phoneNumber.length < 10) {
@@ -26,11 +27,29 @@ const PaymentModal = ({ user, amount, products, onClose }) => {
 
     setIsLoading(true)
     try {
-      await checkoutOrder({ userId,phoneNumber, amount, products }).unwrap()
+      // Transform the products array to include only productId and quantity
+      const transformedProducts = products.map(product => ({
+        productId: product._id, 
+        quantity: product.quantity
+      }))
+
+      // Format the amount to two decimal places
+      const formattedAmount = parseFloat(amount.toFixed(0))
+
+      // Send the data to the backend
+      await checkoutOrder({
+        userId,
+        email,
+        phoneNumber,
+        amount: formattedAmount, // Send the formatted amount
+        products: transformedProducts // Send the transformed products array
+      }).unwrap()
+
       alert("Payment completed successfully")
       onClose()
     } catch (err) {
       setError("An error occurred during checkout")
+      console.error("Checkout Error:", err) 
     } finally {
       setIsLoading(false)
     }
@@ -78,7 +97,7 @@ const PaymentModal = ({ user, amount, products, onClose }) => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">Amount to Pay</label>
-          <p className="text-lg font-semibold">${amount.toFixed(2)}</p>
+          <p className="text-lg font-semibold">Ksh {amount.toFixed(2)}</p>
         </div>
         <div className="flex justify-end space-x-3">
           <button
@@ -101,4 +120,3 @@ const PaymentModal = ({ user, amount, products, onClose }) => {
 }
 
 export default PaymentModal
-

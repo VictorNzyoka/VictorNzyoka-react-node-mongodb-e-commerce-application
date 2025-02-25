@@ -8,9 +8,9 @@ import { Link } from "react-router-dom"
 
 const UserOrders = () => {
   const { user } = useSelector((state) => state.auth)
+  // console.log(user)
   const { data: orders, error, isLoading } = useGetOrdersByEmailQuery(user?.email)
-  console.log(orders)
-
+  // console.log(orders)
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64 bg-white">

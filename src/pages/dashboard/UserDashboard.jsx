@@ -37,7 +37,7 @@ const UserDashboard = () => {
     <div className='space-y-5 bg-white p-8 md:h-screen flex flex-col justify-between'>
         <div>
         <div className='nav__logo'>
-            <Link to="/ ">Shopless<span>.</span></Link>
+            <Link to="/">Shopless<span>.</span></Link>
             <p className='text-xs italics'>User Dashboard</p>
         </div>
 

@@ -16,7 +16,7 @@ const ManageUsers = () => {
 
   const handleDelete = async (id) => {
      try {
-      const response = await deleteProduct(id).unwrap();
+      const response = await deleteUser(id).unwrap();
       alert("User deleted successfully")
        await refetch()
     } catch (error) {

@@ -29,11 +29,11 @@ const OrderSummary = () => {
       <div className="px-6 py-4 space-y-5">
         <h2 className="text-2xl text-text-dark">Order Summary</h2>
         <p className="text-text-dark mt-2">Selected Items: {selectedItems} </p>
-        <p>Total Price: ${totalPrice.toFixed(2)}</p>
+        <p>Total Price: Ksh {totalPrice.toFixed(2)}</p>
         <p>
-          Tax ({taxRate * 100}%): ${tax.toFixed(2)}
+          Tax ({taxRate * 100}%): Ksh {tax.toFixed(2)}
         </p>
-        <h3 className="font-bold">GrandTotal: ${grandTotal.toFixed(2)}</h3>
+        <h3 className="font-bold">GrandTotal:  Ksh {grandTotal.toFixed(2)}</h3>
         <div className="px-4 mb-6">
           <button
             onClick={(e) => {
