@@ -1,5 +1,5 @@
 export const getBaseUrl = () => {
-    return "http://localhost:5000"
+    return "https://e-commerce-node-express-application.onrender.com"
   }
   
   
